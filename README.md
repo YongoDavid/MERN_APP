@@ -2,7 +2,7 @@
 
 CONNECT mongoDB {
   Cluster has been created
-  Conection strring username and password i already have  
+  Conection string username and password i already have  
 }
 
 Error i am getting when starting /server dev server "[nodemon] app crashed - waiting for file changes before starting..."
