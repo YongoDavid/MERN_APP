@@ -1,19 +1,77 @@
 /*
  *
- * Category constants
+ * Edit
  *
  */
 
-export const FETCH_CATEGORIES = 'src/Category/FETCH_CATEGORIES';
-export const FETCH_STORE_CATEGORIES = 'src/Category/FETCH_STORE_CATEGORIES';
-export const FETCH_CATEGORY = 'src/Category/FETCH_CATEGORY';
-export const CATEGORY_CHANGE = 'src/Category/CATEGORY_CHANGE';
-export const CATEGORY_EDIT_CHANGE = 'src/Category/CATEGORY_EDIT_CHANGE';
-export const SET_CATEGORY_FORM_ERRORS = 'src/Category/SET_CATEGORY_FORM_ERRORS';
-export const SET_CATEGORY_FORM_EDIT_ERRORS =
-  'src/Category/SET_CATEGORY_FORM_EDIT_ERRORS';
-export const RESET_CATEGORY = 'src/Category/RESET_CATEGORY';
-export const CATEGORY_SELECT = 'src/Category/CATEGORY_SELECT';
-export const ADD_CATEGORY = 'src/Category/ADD_CATEGORY';
-export const REMOVE_CATEGORY = 'src/Category/REMOVE_CATEGORY';
-export const SET_CATEGORIES_LOADING = 'src/Product/SET_CATEGORIES_LOADING';
+import React from 'react';
+
+import { connect } from 'react-redux';
+
+import actions from '../../actions';
+
+import EditCategory from '../../components/Manager/EditCategory';
+import SubPage from '../../components/Manager/SubPage';
+import NotFound from '../../components/Common/NotFound';
+
+class Edit extends React.PureComponent {
+  componentDidMount() {
+    this.props.resetCategory();
+    const categoryId = this.props.match.params.id;
+    this.props.fetchCategory(categoryId);
+    this.props.fetchProductsSelect();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.match.params.id !== prevProps.match.params.id) {
+      this.props.resetCategory();
+      const categoryId = this.props.match.params.id;
+      this.props.fetchCategory(categoryId);
+    }
+  }
+
+  render() {
+    const {
+      history,
+      products,
+      category,
+      formErrors,
+      categoryEditChange,
+      updateCategory,
+      deleteCategory,
+      activateCategory
+    } = this.props;
+
+    return (
+      <SubPage
+        title='Edit Category'
+        actionTitle='Cancel'
+        handleAction={history.goBack}
+      >
+        {category?._id ? (
+          <EditCategory
+            products={products}
+            category={category}
+            formErrors={formErrors}
+            categoryChange={categoryEditChange}
+            updateCategory={updateCategory}
+            deleteCategory={deleteCategory}
+            activateCategory={activateCategory}
+          />
+        ) : (
+          <NotFound message='No category found.' />
+        )}
+      </SubPage>
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    products: state.product.productsSelect,
+    category: state.category.category,
+    formErrors: state.category.editFormErrors
+  };
+};
+
+export default connect(mapStateToProps, actions)(Edit);
