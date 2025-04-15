@@ -1,11 +1,22 @@
  ## MERN DETAILS Description
 
+PACKAGES THAT ARE NOT DOWNLOADING :
+npm install connected-react-router (Currently have react 19 i need react 16)
+npm install react-bootstrap-table-next (Same issue with above )
+npm install react-bootstrap-table2-toolkit (Same issue wiith above )
+npm install react-notification-system-redux ( same issue with above )
+
+npm install optimize-css-assets-webpack-plugin
+
+Done for now, when i am back i will reinstall all dependecies to thier correct version and then DEL & INS nodemodules again
 CONNECT mongoDB {
   Cluster has been created
   Conection string username and password i already have  
 }
 
-Error i am getting when starting /server dev server "[nodemon] app crashed - waiting for file changes before starting..."
+Error i am getting when starting /server dev server "[nodemon] app crashed - waiting for file changes before starting..." (Kind of fixed )
+
+Webpack error fixed i will reset dep and reinstall and start over to check and fix the next error.
 
 i also need to fill .env.examples file with the correct variables.
 Also {
