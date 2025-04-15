@@ -6,7 +6,7 @@
 
 import React from 'react';
 
-import { Switch, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { Row, Col } from 'reactstrap';
 
 import AccountMenu from '../AccountMenu';
@@ -33,20 +33,20 @@ const Admin = props => {
         </Col>
         <Col xs='12' md='7' xl='9'>
           <div className='panel-body'>
-            <Switch>
-              <Route exact path='/dashboard' component={Account} />
-              <Route path='/dashboard/security' component={AccountSecurity} />
-              <Route path='/dashboard/address' component={Address} />
-              <Route path='/dashboard/product' component={Product} />
-              <Route path='/dashboard/category' component={Category} />
-              <Route path='/dashboard/brand' component={Brand} />
-              <Route path='/dashboard/users' component={Users} />
-              <Route path='/dashboard/merchant' component={Merchant} />
-              <Route path='/dashboard/orders' component={Order} />
-              <Route path='/dashboard/review' component={Review} />
-              <Route path='/dashboard/wishlist' component={Wishlist} />
-              <Route path='*' component={Page404} />
-            </Switch>
+            <Routes>
+              <Route path='/dashboard' element={<Account />} />
+              <Route path='/dashboard/security' element={<AccountSecurity />} />
+              <Route path='/dashboard/address' element={<Address />} />
+              <Route path='/dashboard/product' element={<Product />} />
+              <Route path='/dashboard/category' element={<Category />} />
+              <Route path='/dashboard/brand' element={<Brand />} />
+              <Route path='/dashboard/users' element={<Users />} />
+              <Route path='/dashboard/merchant' element={<Merchant />} />
+              <Route path='/dashboard/orders' element={<Order />} />
+              <Route path='/dashboard/review' element={<Review />} />
+              <Route path='/dashboard/wishlist' element={<Wishlist />} />
+              <Route path='*' element={<Page404 />} />
+            </Routes>
           </div>
         </Col>
       </Row>

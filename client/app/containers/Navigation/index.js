@@ -7,7 +7,7 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-import { Link, NavLink as ActiveLink, withRouter } from 'react-router-dom';
+import { Link, NavLink as ActiveLink, useNavigate, useLocation } from 'react-router-dom';
 import Autosuggest from 'react-autosuggest';
 import AutosuggestHighlightMatch from 'autosuggest-highlight/match';
 import AutosuggestHighlightParse from 'autosuggest-highlight/parse';
@@ -86,6 +86,7 @@ class Navigation extends React.PureComponent {
                 ? suggestion.imageUrl
                 : '/images/placeholder-image.png'
             }`}
+            alt={suggestion.name}
           />
           <div>
             <Container>
@@ -353,4 +354,22 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, actions)(withRouter(Navigation));
+// Create a wrapper component that uses hooks and passes them as props
+const NavigationWithRouter = props => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  
+  // Create a history-like object that uses navigate
+  const history = {
+    push: path => navigate(path),
+    location: location,
+    listen: () => () => {} // Placeholder for any listen calls
+  };
+  
+  return <Navigation {...props} history={history} />;
+};
+
+export default connect(
+  mapStateToProps,
+  actions
+)(NavigationWithRouter);

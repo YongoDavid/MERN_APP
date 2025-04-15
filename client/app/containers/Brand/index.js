@@ -5,9 +5,8 @@
  */
 
 import React from 'react';
-
 import { connect } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import actions from '../../actions';
 import { ROLES } from '../../constants';
@@ -22,14 +21,14 @@ class Brand extends React.PureComponent {
 
     return (
       <div className='brand-dashboard'>
-        <Switch>
-          <Route exact path='/dashboard/brand' component={List} />
-          <Route exact path='/dashboard/brand/edit/:id' component={Edit} />
+        <Routes>
+          <Route path='/dashboard/brand' element={<List />} />
+          <Route path='/dashboard/brand/edit/:id' element={<Edit />} />
           {user.role === ROLES.Admin && (
-            <Route exact path='/dashboard/brand/add' component={Add} />
+            <Route path='/dashboard/brand/add' element={<Add />} />
           )}
-          <Route path='*' component={Page404} />
-        </Switch>
+          <Route path='*' element={<Page404 />} />
+        </Routes>
       </div>
     );
   }

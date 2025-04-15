@@ -5,9 +5,8 @@
  */
 
 import React from 'react';
-
 import { connect } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { Container } from 'reactstrap';
 
 import actions from '../../actions';
@@ -42,6 +41,7 @@ class Application extends React.PureComponent {
     super(props);
     this.handleStorage = this.handleStorage.bind(this);
   }
+
   componentDidMount() {
     const token = localStorage.getItem('token');
 
@@ -80,35 +80,26 @@ class Application extends React.PureComponent {
         <main className='main'>
           <Container>
             <div className='wrapper'>
-              <Switch>
-                <Route exact path='/' component={HomePage} />
-                <Route path='/shop' component={Shop} />
-                <Route path='/sell' component={Sell} />
-                <Route path='/contact' component={Contact} />
-                <Route path='/brands' component={BrandsPage} />
-                <Route path='/product/:slug' component={ProductPage} />
-                <Route path='/order/success/:id' component={OrderSuccess} />
-                <Route path='/order/:id' component={OrderPage} />
-                <Route path='/login' component={Login} />
-                <Route path='/register' component={Signup} />
-                <Route
-                  path='/merchant-signup/:token'
-                  component={MerchantSignup}
-                />
-                <Route path='/forgot-password' component={ForgotPassword} />
-                <Route
-                  path='/reset-password/:token'
-                  component={ResetPassword}
-                />
-                <Route path='/auth/success' component={AuthSuccess} />
-                <Route path='/support' component={Authentication(Support)} />
-                <Route
-                  path='/dashboard'
-                  component={Authentication(Dashboard)}
-                />
-                <Route path='/404' component={Page404} />
-                <Route path='*' component={Page404} />
-              </Switch>
+              <Routes>
+                <Route path='/' element={<HomePage />} />
+                <Route path='/shop' element={<Shop />} />
+                <Route path='/sell' element={<Sell />} />
+                <Route path='/contact' element={<Contact />} />
+                <Route path='/brands' element={<BrandsPage />} />
+                <Route path='/product/:slug' element={<ProductPage />} />
+                <Route path='/order/success/:id' element={<OrderSuccess />} />
+                <Route path='/order/:id' element={<OrderPage />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/register' element={<Signup />} />
+                <Route path='/merchant-signup/:token' element={<MerchantSignup />} />
+                <Route path='/forgot-password' element={<ForgotPassword />} />
+                <Route path='/reset-password/:token' element={<ResetPassword />} />
+                <Route path='/auth/success' element={<AuthSuccess />} />
+                <Route path='/support' element={React.createElement(Authentication(Support))} />
+                <Route path='/dashboard' element={React.createElement(Authentication(Dashboard))} />
+                <Route path='/404' element={<Page404 />} />
+                <Route path='*' element={<Page404 />} />
+              </Routes>
             </div>
           </Container>
         </main>
@@ -121,7 +112,7 @@ class Application extends React.PureComponent {
 const mapStateToProps = state => {
   return {
     authenticated: state.authentication.authenticated,
-    products: state.product.storeProducts
+    products: state.product.storeProducts,
   };
 };
 

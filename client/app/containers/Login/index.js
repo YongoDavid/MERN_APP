@@ -1,13 +1,7 @@
-/*
- *
- * Login
- *
- */
-
 import React from 'react';
 
 import { connect } from 'react-redux';
-import { Redirect, Link } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 import { Row, Col } from 'reactstrap';
 
 import actions from '../../actions';
@@ -29,7 +23,7 @@ class Login extends React.PureComponent {
       isSubmitting
     } = this.props;
 
-    if (authenticated) return <Redirect to='/dashboard' />;
+    if (authenticated) return <Navigate to='/dashboard' replace />;
 
     const registerLink = () => {
       this.props.history.push('/register');

@@ -7,7 +7,7 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import actions from '../../actions';
 
@@ -20,12 +20,12 @@ class Address extends React.PureComponent {
   render() {
     return (
       <div className='address-dashboard'>
-        <Switch>
-          <Route exact path='/dashboard/address' component={List} />
-          <Route exact path='/dashboard/address/edit/:id' component={Edit} />
-          <Route exact path='/dashboard/address/add' component={Add} />
-          <Route path='*' component={Page404} />
-        </Switch>
+        <Routes>
+          <Route path='/dashboard/address' element={<List />} />
+          <Route path='/dashboard/address/edit/:id' element={<Edit />} />
+          <Route path='/dashboard/address/add' element={<Add />} />
+          <Route path='*' element={<Page404 />} />
+        </Routes>
       </div>
     );
   }
