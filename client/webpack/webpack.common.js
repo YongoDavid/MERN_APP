@@ -17,6 +17,20 @@ module.exports = {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
         exclude: /(node_modules)/
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',       // Injects styles into the DOM
+          'css-loader',         // Resolves CSS imports and URLs
+          'postcss-loader',     // Processes CSS with PostCSS
+          {
+            loader: 'sass-loader',
+            options: {
+              implementation: require('sass') // Use Dart Sass explicitly
+            }
+          }
+        ]
       }
     ]
   },
