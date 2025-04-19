@@ -20,12 +20,17 @@ import './styles/style.scss';
 
 // Import Font Awesome Icons Set
 import 'font-awesome/css/font-awesome.min.css';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { fab } from '@fortawesome/free-brands-svg-icons';
 
+library.add(fas, far, fab);
 // Import Simple Line Icons Set
 import 'simple-line-icons/css/simple-line-icons.css';
 
-// react-bootstrap-table2 styles
-import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+// // react-bootstrap-table2 styles
+// import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
 // rc-slider style
 import 'rc-slider/assets/index.css';

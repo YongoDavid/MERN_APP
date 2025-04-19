@@ -5,7 +5,7 @@
  */
 
 import { goBack } from 'connected-react-router';
-import { success } from 'react-notification-system-redux';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 
 import {
@@ -122,11 +122,10 @@ export const addAddress = () => {
 
       const response = await axios.post(`${API_URL}/address/add`, address);
 
-      const successfulOptions = {
-        title: `${response.data.message}`,
-        position: 'tr',
-        autoDismiss: 1
-      };
+      toast.success(response.data.message, {
+        position: "top-right",
+        autoClose: 1000
+      });
 
       if (response.data.success === true) {
         dispatch(success(successfulOptions));

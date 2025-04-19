@@ -4,7 +4,8 @@
  *
  */
 
-import { success } from 'react-notification-system-redux';
+// import { success } from 'react-notification-system-redux';
+import { toast } from 'react-toastify'; 
 import axios from 'axios';
 
 import {
@@ -63,11 +64,16 @@ export const updateProfile = () => {
         profile
       });
 
-      const successfulOptions = {
-        title: `${response.data.message}`,
-        position: 'tr',
-        autoDismiss: 1
-      };
+      // const successfulOptions = {
+      //   title: `${response.data.message}`,
+      //   position: 'tr',
+      //   autoDismiss: 1
+      // };
+
+      toast.success(response.data.message, {
+        position: "top-right",
+        autoClose: 1000
+      });
 
       dispatch({ type: FETCH_PROFILE, payload: response.data.user });
 
