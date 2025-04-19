@@ -6,7 +6,6 @@
 
 import { createStore, compose, applyMiddleware } from 'redux';
 import { thunk } from 'redux-thunk';
-import { routerMiddleware } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 
 import createReducer from './reducers';
@@ -16,7 +15,7 @@ export const history = createBrowserHistory({
   hashType: 'noslash'
 });
 
-const middlewares = [thunk, routerMiddleware(history)];
+const middlewares = [thunk];
 
 const enhancers = [applyMiddleware(...middlewares)];
 
@@ -29,7 +28,7 @@ const composeEnhancers =
     : compose;
 
 const store = createStore(
-  createReducer(history),
+  createReducer(),
   composeEnhancers(...enhancers)
 );
 
@@ -37,7 +36,7 @@ if (module.hot) {
   // Enable Webpack hot module replacement for reducers
   module.hot.accept('./reducers', () => {
     const nextRootReducer = require('./reducers').default; // eslint-disable-line global-require
-    store.replaceReducer(nextRootReducer(history));
+    store.replaceReducer(nextRootReducer());
   });
 }
 

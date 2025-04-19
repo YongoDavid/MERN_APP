@@ -5,7 +5,6 @@
  */
 
 import { combineReducers } from 'redux';
-import { connectRouter } from 'connected-react-router';
 import { reducer as notifications } from 'react-notification-system-redux';
 
 // import reducers
@@ -34,9 +33,8 @@ import orderReducer from './containers/Order/reducer';
 import reviewReducer from './containers/Review/reducer';
 import wishListReducer from './containers/WishList/reducer';
 
-const createReducer = history =>
+const createReducer = () =>
   combineReducers({
-    router: connectRouter(history),
     notifications,
     application: applicationReducer,
     homepage: homepageReducer,

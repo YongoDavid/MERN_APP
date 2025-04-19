@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'connected-react-router';
+import { BrowserRouter } from 'react-router-dom';
 
 import store, { history } from './store';
 import { SocketProvider } from './contexts/Socket';
@@ -43,13 +43,13 @@ if (token) {
 
 const App = () => (
   <Provider store={store}>
-    <ConnectedRouter history={history}>
+    <BrowserRouter>
       <SocketProvider>
         <ScrollToTop>
           <Application />
         </ScrollToTop>
       </SocketProvider>
-    </ConnectedRouter>
+    </BrowserRouter>
   </Provider>
 );
 
