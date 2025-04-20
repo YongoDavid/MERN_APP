@@ -4,8 +4,8 @@
  *
  */
 
-import { push } from 'connected-react-router';
-import { success } from 'react-notification-system-redux';
+import { useNavigate } from 'react-router-dom'; // Replace useHistory with useNavigate from react-router-dom
+import { toast } from 'react-toastify';  // Replaced react-notification-system-redux with react-toastify
 import axios from 'axios';
 
 import {
@@ -24,7 +24,7 @@ export const forgotPasswordChange = (name, value) => {
   };
 };
 
-export const forgotPassowrd = () => {
+export const forgotPassword = () => {
   return async (dispatch, getState) => {
     try {
       const rules = {
@@ -47,14 +47,17 @@ export const forgotPassowrd = () => {
       const response = await axios.post(`${API_URL}/auth/forgot`, user);
       const successfulOptions = {
         title: `${response.data.message}`,
-        position: 'tr',
+        position: 'top-right',  // You can adjust the position and other settings based on the toast configuration
         autoDismiss: 1
       };
 
       if (response.data.success === true) {
-        dispatch(push('/login'));
+        const navigate = useNavigate();  // Use useNavigate instead of useHistory
+        navigate('/login');  // Navigation after successful password reset
       }
-      dispatch(success(successfulOptions));
+
+      // Replaced success with toast from react-toastify
+      toast.success(response.data.message, successfulOptions);
 
       dispatch({ type: FORGOT_PASSWORD_RESET });
     } catch (error) {

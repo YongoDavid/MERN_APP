@@ -4,9 +4,9 @@
  *
  */
 
-import { goBack } from 'connected-react-router';
-import { success } from 'react-notification-system-redux';
+import { toast } from 'react-toastify';  // Changed to react-toastify
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';  // Added to use navigate hook
 
 import {
   FETCH_CATEGORIES,
@@ -154,13 +154,14 @@ export const addCategory = () => {
       };
 
       if (response.data.success === true) {
-        dispatch(success(successfulOptions));
+        toast.success(successfulOptions.title, { position: "top-right", autoClose: 3000 });
         dispatch({
           type: ADD_CATEGORY,
           payload: response.data.category
         });
         dispatch(resetCategory());
-        dispatch(goBack());
+        const navigate = useNavigate(); // Added navigate hook
+        navigate(-1); // Go back using the history
       }
     } catch (error) {
       handleError(error, dispatch);
@@ -217,9 +218,10 @@ export const updateCategory = () => {
       };
 
       if (response.data.success === true) {
-        dispatch(success(successfulOptions));
+        toast.success(successfulOptions.title, { position: "top-right", autoClose: 3000 });
         dispatch(resetCategory());
-        dispatch(goBack());
+        const navigate = useNavigate(); // Added navigate hook
+        navigate(-1); // Go back using the history
       }
     } catch (error) {
       handleError(error, dispatch);
@@ -244,9 +246,9 @@ export const activateCategory = (id, value) => {
       };
 
       if (response.data.success === true) {
-        dispatch(success(successfulOptions));
+        toast.success(successfulOptions.title, { position: "top-right", autoClose: 3000 });
       }
-    } catch (error) {
+    } catch (error)      {
       handleError(error, dispatch);
     }
   };
@@ -265,15 +267,17 @@ export const deleteCategory = id => {
       };
 
       if (response.data.success == true) {
-        dispatch(success(successfulOptions));
+        toast.success(successfulOptions.title, { position: "top-right", autoClose: 3000 });
         dispatch({
           type: REMOVE_CATEGORY,
           payload: id
         });
-        dispatch(goBack());
+        const navigate = useNavigate(); // Added navigate hook
+        navigate(-1); // Go back using the history
       }
     } catch (error) {
       handleError(error, dispatch);
     }
   };
 };
+

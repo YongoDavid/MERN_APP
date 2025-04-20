@@ -4,7 +4,6 @@
  *
  */
 
-import { goBack } from 'connected-react-router';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
@@ -26,22 +25,16 @@ import { allFieldsValidation } from '../../utils/validation';
 import { API_URL } from '../../constants';
 
 export const addressChange = (name, value) => {
-  let formData = {};
-  formData[name] = value;
-
   return {
     type: ADDRESS_CHANGE,
-    payload: formData
+    payload: { [name]: value }
   };
 };
 
 export const addressEditChange = (name, value) => {
-  let formData = {};
-  formData[name] = value;
-
   return {
     type: ADDRESS_EDIT_CHANGE,
-    payload: formData
+    payload: { [name]: value }
   };
 };
 
@@ -60,7 +53,7 @@ export const setAddressLoading = value => {
 };
 
 export const fetchAddresses = () => {
-  return async (dispatch, getState) => {
+  return async dispatch => {
     try {
       dispatch(setAddressLoading(true));
       const response = await axios.get(`${API_URL}/address`);
@@ -73,16 +66,11 @@ export const fetchAddresses = () => {
   };
 };
 
-// fetch address api
 export const fetchAddress = addressId => {
-  return async (dispatch, getState) => {
+  return async dispatch => {
     try {
       const response = await axios.get(`${API_URL}/address/${addressId}`);
-
-      dispatch({
-        type: FETCH_ADDRESS,
-        payload: response.data.address
-      });
+      dispatch({ type: FETCH_ADDRESS, payload: response.data.address });
     } catch (error) {
       handleError(error, dispatch);
     }
@@ -115,11 +103,7 @@ export const addAddress = () => {
         return dispatch({ type: SET_ADDRESS_FORM_ERRORS, payload: errors });
       }
 
-      const address = {
-        isDefault,
-        ...newAddress
-      };
-
+      const address = { isDefault, ...newAddress };
       const response = await axios.post(`${API_URL}/address/add`, address);
 
       toast.success(response.data.message, {
@@ -127,14 +111,13 @@ export const addAddress = () => {
         autoClose: 1000
       });
 
-      if (response.data.success === true) {
-        dispatch(success(successfulOptions));
+      if (response.data.success) {
         dispatch({
           type: ADD_ADDRESS,
           payload: response.data.address
         });
-        dispatch(goBack());
         dispatch({ type: RESET_ADDRESS });
+        // navigate back in component using useNavigate()
       }
     } catch (error) {
       handleError(error, dispatch);
@@ -142,7 +125,6 @@ export const addAddress = () => {
   };
 };
 
-// update address api
 export const updateAddress = () => {
   return async (dispatch, getState) => {
     try {
@@ -171,20 +153,15 @@ export const updateAddress = () => {
         });
       }
 
-      const response = await axios.put(
-        `${API_URL}/address/${newAddress._id}`,
-        newAddress
-      );
+      const response = await axios.put(`${API_URL}/address/${newAddress._id}`, newAddress);
 
-      const successfulOptions = {
-        title: `${response.data.message}`,
-        position: 'tr',
-        autoDismiss: 1
-      };
+      toast.success(response.data.message, {
+        position: "top-right",
+        autoClose: 1000
+      });
 
-      if (response.data.success === true) {
-        dispatch(success(successfulOptions));
-        dispatch(goBack());
+      if (response.data.success) {
+        // navigate back in component using useNavigate()
       }
     } catch (error) {
       handleError(error, dispatch);
@@ -192,25 +169,22 @@ export const updateAddress = () => {
   };
 };
 
-// delete address api
 export const deleteAddress = id => {
-  return async (dispatch, getState) => {
+  return async dispatch => {
     try {
       const response = await axios.delete(`${API_URL}/address/delete/${id}`);
 
-      const successfulOptions = {
-        title: `${response.data.message}`,
-        position: 'tr',
-        autoDismiss: 1
-      };
+      toast.success(response.data.message, {
+        position: "top-right",
+        autoClose: 1000
+      });
 
-      if (response.data.success === true) {
-        dispatch(success(successfulOptions));
+      if (response.data.success) {
         dispatch({
           type: REMOVE_ADDRESS,
           payload: id
         });
-        dispatch(goBack());
+        // navigate back in component using useNavigate()
       }
     } catch (error) {
       handleError(error, dispatch);

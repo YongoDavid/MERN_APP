@@ -4,8 +4,7 @@
  *
  */
 
-import { push } from 'connected-react-router';
-import { success } from 'react-notification-system-redux';
+import { toast } from 'react-toastify';  // Changed to react-toastify
 import axios from 'axios';
 
 import {
@@ -26,6 +25,7 @@ import { API_URL, CART_ID, CART_ITEMS, CART_TOTAL } from '../../constants';
 import handleError from '../../utils/error';
 import { allFieldsValidation } from '../../utils/validation';
 import { toggleCart } from '../Navigation/actions';
+
 
 // Handle Add To Cart
 export const handleAddToCart = product => {
@@ -127,7 +127,7 @@ export const handleCart = () => {
   };
 };
 
-export const handleCheckout = () => {
+export const handleCheckout = (navigate) => {
   return (dispatch, getState) => {
     const successfulOptions = {
       title: `Please Login to proceed to checkout`,
@@ -136,15 +136,14 @@ export const handleCheckout = () => {
     };
 
     dispatch(toggleCart());
-    dispatch(push('/login'));
-    dispatch(success(successfulOptions));
+    navigate('/login');
+    toast.success(successfulOptions.title, { position: "top-right", autoClose: 3000 });
   };
 };
 
-// Continue shopping use case
-export const handleShopping = () => {
+export const handleShopping = (navigate) => {
   return (dispatch, getState) => {
-    dispatch(push('/shop'));
+    navigate('/shop');
     dispatch(toggleCart());
   };
 };

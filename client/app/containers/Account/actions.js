@@ -4,7 +4,6 @@
  *
  */
 
-// import { success } from 'react-notification-system-redux';
 import { toast } from 'react-toastify'; 
 import axios from 'axios';
 
@@ -18,12 +17,9 @@ import handleError from '../../utils/error';
 import { API_URL } from '../../constants';
 
 export const accountChange = (name, value) => {
-  let formData = {};
-  formData[name] = value;
-
   return {
     type: ACCOUNT_CHANGE,
-    payload: formData
+    payload: { [name]: value }
   };
 };
 
@@ -33,7 +29,7 @@ export const clearAccount = () => {
   };
 };
 
-export const setProfileLoading = value => {
+export const setProfileLoading = (value) => {
   return {
     type: SET_PROFILE_LOADING,
     payload: value
@@ -41,11 +37,10 @@ export const setProfileLoading = value => {
 };
 
 export const fetchProfile = () => {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     try {
       dispatch(setProfileLoading(true));
       const response = await axios.get(`${API_URL}/user/me`);
-
       dispatch({ type: FETCH_PROFILE, payload: response.data.user });
     } catch (error) {
       handleError(error, dispatch);
@@ -60,15 +55,7 @@ export const updateProfile = () => {
     const profile = getState().account.user;
 
     try {
-      const response = await axios.put(`${API_URL}/user`, {
-        profile
-      });
-
-      // const successfulOptions = {
-      //   title: `${response.data.message}`,
-      //   position: 'tr',
-      //   autoDismiss: 1
-      // };
+      const response = await axios.put(`${API_URL}/user`, { profile });
 
       toast.success(response.data.message, {
         position: "top-right",
@@ -77,7 +64,7 @@ export const updateProfile = () => {
 
       dispatch({ type: FETCH_PROFILE, payload: response.data.user });
 
-      dispatch(success(successfulOptions));
+      // If navigation is needed, handle it in the component using useNavigate()
     } catch (error) {
       handleError(error, dispatch);
     }

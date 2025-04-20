@@ -4,8 +4,7 @@
  *
  */
 
-import { goBack } from 'connected-react-router';
-import { success } from 'react-notification-system-redux';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 
 import {
@@ -119,7 +118,7 @@ export const fetchBrandsSelect = () => {
 };
 
 // add brand api
-export const addBrand = () => {
+export const addBrand = (navigate) => {
   return async (dispatch, getState) => {
     try {
       const rules = {
@@ -141,11 +140,10 @@ export const addBrand = () => {
 
       const response = await axios.post(`${API_URL}/brand/add`, brand);
 
-      const successfulOptions = {
-        title: `${response.data.message}`,
-        position: 'tr',
-        autoDismiss: 1
-      };
+      toast.success(response.data.message, {
+        position: "top-right",
+        autoClose: 1000
+      });
 
       if (response.data.success === true) {
         dispatch(success(successfulOptions));
@@ -154,7 +152,7 @@ export const addBrand = () => {
           payload: response.data.brand
         });
 
-        dispatch(goBack());
+        navigate(-1); // replaces goBack()
         dispatch({ type: RESET_BRAND });
       }
     } catch (error) {
@@ -164,7 +162,7 @@ export const addBrand = () => {
 };
 
 // update brand api
-export const updateBrand = () => {
+export const updateBrand = (navigate) => {
   return async (dispatch, getState) => {
     try {
       const rules = {
@@ -206,8 +204,7 @@ export const updateBrand = () => {
 
       if (response.data.success === true) {
         dispatch(success(successfulOptions));
-
-        dispatch(goBack());
+        navigate(-1); // replaces goBack()
       }
     } catch (error) {
       handleError(error, dispatch);
@@ -244,7 +241,7 @@ export const activateBrand = (id, value) => {
 };
 
 // delete brand api
-export const deleteBrand = id => {
+export const deleteBrand = (id, navigate) => {
   return async (dispatch, getState) => {
     try {
       const response = await axios.delete(`${API_URL}/brand/delete/${id}`);
@@ -261,7 +258,7 @@ export const deleteBrand = id => {
           type: REMOVE_BRAND,
           payload: id
         });
-        dispatch(goBack());
+        navigate(-1); // replaces goBack()
       }
     } catch (error) {
       handleError(error, dispatch);
