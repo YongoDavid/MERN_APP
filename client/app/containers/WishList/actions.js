@@ -4,7 +4,7 @@
  *
  */
 
-import { success, warning } from 'react-notification-system-redux';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 
 import { FETCH_WISHLIST, SET_WISHLIST_LOADING } from './constants';
@@ -20,23 +20,18 @@ export const updateWishlist = (isLiked, productId) => {
           product: productId
         });
 
-        const successfulOptions = {
-          title: `${response.data.message}`,
-          position: 'tr',
-          autoDismiss: 1
-        };
-
         if (response.data.success === true) {
-          dispatch(success(successfulOptions));
+          toast.success(response.data.message, {
+            position: 'top-right',
+            autoClose: 3000
+          });
           dispatch(fetchWishlist());
         }
       } else {
-        const retryOptions = {
-          title: `Please login to wishlist a product`,
-          position: 'tr',
-          autoDismiss: 1
-        };
-        dispatch(warning(retryOptions));
+        toast.warning('Please login to wishlist a product', {
+          position: 'top-right',
+          autoClose: 3000
+        });
       }
     } catch (error) {
       handleError(error, dispatch);

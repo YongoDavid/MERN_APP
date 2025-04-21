@@ -5,7 +5,6 @@
  */
 
 import { combineReducers } from 'redux';
-import { reducer as notifications } from 'react-notification-system-redux';
 
 // import reducers
 import applicationReducer from './containers/Application/reducer';
@@ -35,7 +34,6 @@ import wishListReducer from './containers/WishList/reducer';
 
 const createReducer = () =>
   combineReducers({
-    notifications,
     application: applicationReducer,
     homepage: homepageReducer,
     signup: signupReducer,

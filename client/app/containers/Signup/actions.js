@@ -4,7 +4,7 @@
  *
  */
 
-import { success } from 'react-notification-system-redux';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 
 import {
@@ -72,18 +72,19 @@ export const signUp = () => {
 
       const response = await axios.post(`${API_URL}/auth/register`, user);
 
-      const successfulOptions = {
-        title: `You have signed up successfully! You will be receiving an email as well. Thank you!`,
-        position: 'tr',
-        autoDismiss: 1
-      };
+      toast.success(
+        'You have signed up successfully! You will be receiving an email as well. Thank you!',
+        {
+          position: 'top-right',
+          autoClose: 3000
+        }
+      );
 
       localStorage.setItem('token', response.data.token);
 
       setToken(response.data.token);
 
       dispatch(setAuth());
-      dispatch(success(successfulOptions));
       dispatch({ type: SIGNUP_RESET });
     } catch (error) {
       const title = `Please try to signup again!`;

@@ -4,7 +4,7 @@
  *
  */
 
-import { success } from 'react-notification-system-redux';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 import DOMPurify from 'dompurify';
 
@@ -64,7 +64,6 @@ export const approveReview = review => {
   return async (dispatch, getState) => {
     try {
       await axios.put(`${API_URL}/review/approve/${review._id}`);
-
       dispatch(fetchReviews());
     } catch (error) {
       handleError(error, dispatch);
@@ -76,7 +75,6 @@ export const rejectReview = review => {
   return async (dispatch, getState) => {
     try {
       await axios.put(`${API_URL}/review/reject/${review._id}`);
-
       dispatch(fetchReviews());
     } catch (error) {
       handleError(error, dispatch);
@@ -90,14 +88,8 @@ export const deleteReview = id => {
     try {
       const response = await axios.delete(`${API_URL}/review/delete/${id}`);
 
-      const successfulOptions = {
-        title: `${response.data.message}`,
-        position: 'tr',
-        autoDismiss: 1
-      };
-
-      if (response.data.success == true) {
-        dispatch(success(successfulOptions));
+      if (response.data.success === true) {
+        toast.success(response.data.message);
         dispatch({
           type: REMOVE_REVIEW,
           payload: id
@@ -176,20 +168,9 @@ export const addProductReview = () => {
         isRecommended: review.isRecommended.value
       });
 
-      const successfulOptions = {
-        title: `${response.data.message}`,
-        position: 'tr',
-        autoDismiss: 1
-      };
-
       if (response.data.success === true) {
-        dispatch(success(successfulOptions));
+        toast.success(response.data.message);
         dispatch(fetchProductReviews(product.slug));
-
-        // dispatch({
-        //   type: ADD_REVIEW,
-        //   payload: response.data.review
-        // });
         dispatch({ type: RESET_REVIEW });
       }
     } catch (error) {
@@ -217,25 +198,20 @@ export const getProductReviewsSummary = reviews => {
         case 4:
           ratingSummary[1][4] += 1;
           totalSummary += 1;
-
           break;
         case 3:
           ratingSummary[2][3] += 1;
           totalSummary += 1;
-
           break;
         case 2:
           ratingSummary[3][2] += 1;
           totalSummary += 1;
-
           break;
         case 1:
           ratingSummary[4][1] += 1;
           totalSummary += 1;
-
           break;
         default:
-          0;
           break;
       }
     });
