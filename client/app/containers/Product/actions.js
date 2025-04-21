@@ -4,8 +4,8 @@
  *
  */
 
-import { goBack } from 'connected-react-router';
-import { success } from 'react-notification-system-redux';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 
 import {
@@ -267,6 +267,7 @@ export const addProduct = () => {
       if (!isValid) {
         return dispatch({ type: SET_PRODUCT_FORM_ERRORS, payload: errors });
       }
+
       const formData = new FormData();
       if (newProduct.image) {
         for (const key in newProduct) {
@@ -284,14 +285,8 @@ export const addProduct = () => {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
 
-      const successfulOptions = {
-        title: `${response.data.message}`,
-        position: 'tr',
-        autoDismiss: 1
-      };
-
       if (response.data.success === true) {
-        dispatch(success(successfulOptions));
+        toast.success(response.data.message);
         dispatch({
           type: ADD_PRODUCT,
           payload: response.data.product
@@ -305,7 +300,7 @@ export const addProduct = () => {
   };
 };
 
-// update Product api
+// update product api
 export const updateProduct = () => {
   return async (dispatch, getState) => {
     try {
@@ -321,7 +316,6 @@ export const updateProduct = () => {
       };
 
       const product = getState().product.product;
-
       const brand = unformatSelectOptions([product.brand]);
 
       const newProduct = {
@@ -338,14 +332,11 @@ export const updateProduct = () => {
       const { isValid, errors } = allFieldsValidation(newProduct, rules, {
         'required.name': 'Name is required.',
         'required.sku': 'Sku is required.',
-        'alpha_dash.sku':
-          'Sku may have alpha-numeric characters, as well as dashes and underscores only.',
+        'alpha_dash.sku': 'Sku may have alpha-numeric characters, as well as dashes and underscores only.',
         'required.slug': 'Slug is required.',
-        'alpha_dash.slug':
-          'Slug may have alpha-numeric characters, as well as dashes and underscores only.',
+        'alpha_dash.slug': 'Slug may have alpha-numeric characters, as well as dashes and underscores only.',
         'required.description': 'Description is required.',
-        'max.description':
-          'Description may not be greater than 200 characters.',
+        'max.description': 'Description may not be greater than 200 characters.',
         'required.quantity': 'Quantity is required.',
         'required.price': 'Price is required.',
         'required.taxable': 'Taxable is required.',
@@ -363,16 +354,8 @@ export const updateProduct = () => {
         product: newProduct
       });
 
-      const successfulOptions = {
-        title: `${response.data.message}`,
-        position: 'tr',
-        autoDismiss: 1
-      };
-
       if (response.data.success === true) {
-        dispatch(success(successfulOptions));
-
-        //dispatch(goBack());
+        toast.success(response.data.message);
       }
     } catch (error) {
       handleError(error, dispatch);
@@ -390,14 +373,8 @@ export const activateProduct = (id, value) => {
         }
       });
 
-      const successfulOptions = {
-        title: `${response.data.message}`,
-        position: 'tr',
-        autoDismiss: 1
-      };
-
       if (response.data.success === true) {
-        dispatch(success(successfulOptions));
+        toast.success(response.data.message);
       }
     } catch (error) {
       handleError(error, dispatch);
@@ -405,25 +382,20 @@ export const activateProduct = (id, value) => {
   };
 };
 
+const navigate = useNavigate();
 // delete product api
 export const deleteProduct = id => {
   return async (dispatch, getState) => {
     try {
       const response = await axios.delete(`${API_URL}/product/delete/${id}`);
 
-      const successfulOptions = {
-        title: `${response.data.message}`,
-        position: 'tr',
-        autoDismiss: 1
-      };
-
       if (response.data.success === true) {
-        dispatch(success(successfulOptions));
+        toast.success(response.data.message);
         dispatch({
           type: REMOVE_PRODUCT,
           payload: id
         });
-        dispatch(goBack());
+        navigate(-1);
       }
     } catch (error) {
       handleError(error, dispatch);
@@ -532,7 +504,6 @@ const getSortOrder = value => {
     case 2:
       sortOrder.price = 1;
       break;
-
     default:
       break;
   }

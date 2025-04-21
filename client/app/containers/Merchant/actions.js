@@ -1,12 +1,6 @@
-/*
- *
- * Merchant actions
- *
- */
-
-import { push, goBack } from 'connected-react-router';
-import { success } from 'react-notification-system-redux';
+import { toast } from 'react-toastify'; // Updated import
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 import {
   FETCH_MERCHANTS,
@@ -65,6 +59,7 @@ export const setMerchantSubmitting = value => {
 // add merchant api
 export const addMerchant = (isBack = false) => {
   return async (dispatch, getState) => {
+    const navigate = useNavigate(); // Use useNavigate inside the action
     try {
       const phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
 
@@ -105,9 +100,9 @@ export const addMerchant = (isBack = false) => {
       };
 
       if (response.data.success === true) {
-        dispatch(success(successfulOptions));
+        toast.success(successfulOptions.title); // Updated to use toast.success
         dispatch({ type: RESET_MERCHANT });
-        if (isBack) dispatch(goBack());
+        if (isBack) navigate(-1); // Use navigate to go back
       }
     } catch (error) {
       handleError(error, dispatch);
@@ -250,7 +245,7 @@ export const merchantSignUp = token => {
       };
 
       dispatch(signOut());
-      dispatch(success(successfulOptions));
+      toast.success(successfulOptions.title); // Updated to use toast.success
       dispatch(push('/login'));
       dispatch({ type: SIGNUP_RESET });
     } catch (error) {
@@ -275,17 +270,12 @@ export const deleteMerchant = (merchant, search, page) => {
       };
 
       if (response.data.success === true) {
-        dispatch(success(successfulOptions));
+        toast.success(successfulOptions.title); // Updated to use toast.success
 
         if (search)
           return dispatch(searchMerchants({ name: 'merchant', value: search })); // update search list if this is a search result
 
         dispatch(fetchMerchants('merchant', page));
-
-        // dispatch({
-        //   type: REMOVE_MERCHANT,
-        //   payload: merchant._id
-        // });
       }
     } catch (error) {
       handleError(error, dispatch);

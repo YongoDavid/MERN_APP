@@ -4,7 +4,7 @@
  *
  */
 
-import { toast } from 'react-toastify';  // Changed to react-toastify
+import { toast } from 'react-toastify'; 
 import axios from 'axios';
 
 import {

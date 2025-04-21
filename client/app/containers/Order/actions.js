@@ -4,9 +4,9 @@
  *
  */
 
-import { push } from 'connected-react-router';
+import { useNavigate } from 'react-router-dom'; // Replaced connected-react-router with useNavigate
 import axios from 'axios';
-import { success } from 'react-notification-system-redux';
+import { toast } from 'react-toastify'; // Replaced react-notification-system-redux with react-toastify
 
 import {
   FETCH_ORDERS,
@@ -151,10 +151,11 @@ export const cancelOrder = () => {
   return async (dispatch, getState) => {
     try {
       const order = getState().order.order;
+      const navigate = useNavigate(); // Using useNavigate to navigate
 
       await axios.delete(`${API_URL}/order/cancel/${order._id}`);
 
-      dispatch(push(`/dashboard/orders`));
+      navigate(`/dashboard/orders`); // Navigate after successful order cancellation
     } catch (error) {
       handleError(error, dispatch);
     }
@@ -176,19 +177,17 @@ export const updateOrderItemStatus = (itemId, status) => {
       );
 
       if (response.data.orderCancelled) {
-        dispatch(push(`/dashboard/orders`));
+        const navigate = useNavigate(); // Using useNavigate to navigate
+        navigate(`/dashboard/orders`); // Navigate if order is cancelled
       } else {
         dispatch(updateOrderStatus({ itemId, status }));
         dispatch(fetchOrder(order._id, false));
       }
 
-      const successfulOptions = {
-        title: `${response.data.message}`,
-        position: 'tr',
-        autoDismiss: 1
-      };
-
-      dispatch(success(successfulOptions));
+      toast.success(response.data.message, {
+        position: 'top-right',
+        autoClose: 5000
+      }); // Display a success notification using toast
     } catch (error) {
       handleError(error, dispatch);
     }
@@ -207,7 +206,8 @@ export const addOrder = () => {
           total
         });
 
-        dispatch(push(`/order/success/${response.data.order._id}`));
+        const navigate = useNavigate(); // Using useNavigate to navigate
+        navigate(`/order/success/${response.data.order._id}`); // Navigate to order success page
         dispatch(clearCart());
       }
     } catch (error) {

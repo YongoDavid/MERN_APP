@@ -4,9 +4,9 @@
  *
  */
 
-import { success } from 'react-notification-system-redux';
+import { toast } from 'react-toastify'; 
 import axios from 'axios';
-import { push } from 'connected-react-router';
+import { useNavigate } from 'react-router-dom'; 
 
 import {
   LOGIN_CHANGE,
@@ -22,6 +22,9 @@ import { clearCart } from '../Cart/actions';
 import { clearAccount } from '../Account/actions';
 import { allFieldsValidation } from '../../utils/validation';
 import { API_URL } from '../../constants';
+
+// Initialize useNavigate for navigation
+const navigate = useNavigate();
 
 export const loginChange = (name, value) => {
   let formData = {};
@@ -63,7 +66,7 @@ export const login = () => {
 
       const successfulOptions = {
         title: `Hey${firstName ? ` ${firstName}` : ''}, Welcome Back!`,
-        position: 'tr',
+        position: 'top-right', // Customize position
         autoDismiss: 1
       };
 
@@ -72,9 +75,14 @@ export const login = () => {
       setToken(response.data.token);
 
       dispatch(setAuth());
-      dispatch(success(successfulOptions));
+      toast.success(successfulOptions.title, {
+        position: successfulOptions.position,
+        autoClose: 2000
+      });
 
       dispatch({ type: LOGIN_RESET });
+      navigate('/dashboard'); // Navigate to the dashboard or appropriate page
+
     } catch (error) {
       const title = `Please try to login again!`;
       handleError(error, dispatch, title);
@@ -86,20 +94,23 @@ export const login = () => {
 };
 
 export const signOut = () => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     const successfulOptions = {
       title: `You have signed out!`,
-      position: 'tr',
+      position: 'top-right', // Customize position
       autoDismiss: 1
     };
 
     dispatch(clearAuth());
     dispatch(clearAccount());
-    dispatch(push('/login'));
-
     localStorage.removeItem('token');
 
-    dispatch(success(successfulOptions));
-    // dispatch(clearCart());
+    toast.success(successfulOptions.title, {
+      position: successfulOptions.position,
+      autoClose: 2000
+    });
+
+    // Navigate to login page after signing out
+    navigate('/login');
   };
 };

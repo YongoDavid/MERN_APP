@@ -5,30 +5,25 @@
  */
 
 import React from 'react';
-
-import { connect } from 'react-redux';
-import Notifications from 'react-notification-system-redux';
-
-import actions from '../../actions';
+import { toast } from 'react-toastify'; // Importing toast from react-toastify
+import 'react-toastify/dist/ReactToastify.css'; // Importing styles for react-toastify
 
 class Notification extends React.PureComponent {
-  componentDidMount() {}
+  componentDidMount() {
+    const { notifications } = this.props;
+    // Display notifications if there are any
+    notifications.forEach(notification => {
+      if (notification.type === 'success') {
+        toast.success(notification.message, { position: 'top-right', autoClose: 5000 });
+      } else if (notification.type === 'error') {
+        toast.error(notification.message, { position: 'top-right', autoClose: 5000 });
+      }
+      // You can add more types (like info, warning, etc.) based on your notification types
+    });
+  }
 
   render() {
-    const { notifications } = this.props;
-
-    const style = {
-      NotificationItem: {
-        DefaultStyle: {
-          margin: '10px 5px 2px 1px'
-        },
-
-        success: {
-          color: 'red'
-        }
-      }
-    };
-    return <Notifications notifications={notifications} style={style} />;
+    return null; // We don't need to render any JSX in this component as react-toastify will handle displaying the notifications
   }
 }
 
@@ -38,4 +33,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, actions)(Notification);
+export default connect(mapStateToProps)(Notification);

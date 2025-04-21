@@ -4,7 +4,7 @@
  *
  */
 
-import { success } from 'react-notification-system-redux';
+import { toast } from 'react-toastify'; // Updated import
 import axios from 'axios';
 
 import {
@@ -54,7 +54,7 @@ export const subscribeToNewsletter = () => {
       };
 
       dispatch({ type: NEWSLETTER_RESET });
-      dispatch(success(successfulOptions));
+      toast.success(successfulOptions.title, { position: 'top-right', autoClose: 5000 }); // Updated to use toast.success
     } catch (error) {
       handleError(error, dispatch);
     }
