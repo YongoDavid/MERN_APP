@@ -6,9 +6,11 @@ npm install react-bootstrap-table-next (Same issue with above )
 npm install react-bootstrap-table2-toolkit (Same issue wiith above )
 npm install react-notification-system-redux ( same issue with above )
 
+
 npm install optimize-css-assets-webpack-plugin
 
-Done for now, when i am back i will reinstall all dependecies to thier correct version and then DEL & INS nodemodules again
+when i am back i will continue fixing the error from adress.actions
+
 CONNECT mongoDB {
   Cluster has been created
   Conection string username and password i already have  
