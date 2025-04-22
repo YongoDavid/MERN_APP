@@ -1,13 +1,9 @@
-/**
- *
- * index.js
- * This is the entry file for the application
- */
-
+// index.js
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client'; // ✅ new import for React 18+
 
 import App from './App';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-    
+const container = document.getElementById('root');
+const root = createRoot(container); // 🔁 create a root container
+root.render(<App />); // ✅ use the new render method
