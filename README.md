@@ -46,7 +46,7 @@ nginx.conf - Nginx server configuration
 .env.example - Environment variables template
 Dockerfile - Container configuration
 
-(app/) Components:
+(app/):
 components/ - Reusable React components
 containers/ - Page-level components
 contexts/ - React Context providers
@@ -97,3 +97,5 @@ Database Models (server/models/):
 All models use Mongoose Schema for data modeling
 Each model represents a collection in MongoDB
 Models include validation and relationship definitions
+
+stopped at the import area                                                                                                                                                                                                         
