@@ -127,6 +127,11 @@
 // .text-truncate {
 //   @include text-truncate();
 // }
+.text-truncate {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
 
 .w-lg-auto {
   @include media-breakpoint-up(lg) {
@@ -139,14 +144,14 @@
 }
 
 .box-link {
-  @include transition();
+  transition: all 0.3s ease; // Replaced mixin with CSS transition
 
   &:hover,
   &:focus {
     box-shadow: none !important;
     color: $font-custom-color !important;
     background-color: $secondary-bg;
-    @include transition();
+    transition: all 0.3s ease; // Added CSS transition
   }
 }
 
@@ -179,10 +184,10 @@
 }
 
 .drawer-backdrop {
-  @include transition();
+  transition: all 0.3s ease; // Added transition here
 
   &.dark-overflow {
-    @include transition();
+    transition: all 0.3s ease; // Added transition here
   }
 }
 

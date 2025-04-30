@@ -1,3 +1,6 @@
+// Assuming that media breakpoints are declared properly elsewhere using @use
+@use 'path/to/breakpoints' as *;
+
 .newsletter-form {
   p {
     margin: 0;
@@ -7,7 +10,8 @@
 .subscribe {
   .inline-btn-box {
     .input-text-block {
-      @include media-breakpoint-between(md, lg) {
+      // Replacing @include with standard media queries
+      @media (min-width: $md) and (max-width: $lg) {
         flex-direction: column;
 
         .input-text {

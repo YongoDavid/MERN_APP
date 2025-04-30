@@ -5,13 +5,13 @@
       height: 110px;
       max-height: 110px;
       position: relative;
-      border-radius: $border-radius-default;
-      box-shadow: $box-shadow-secondary;
-      @include transition();
+      border-radius: var(--border-radius-default);
+      box-shadow: var(--box-shadow-secondary);
+      @include transition(all 0.3s ease); // Assuming transition is for all properties
 
       &:hover {
-        background-color: $secondary-bg;
-        @include transition();
+        background-color: var(--secondary-bg);
+        @include transition(all 0.3s ease);
       }
 
       .remove-wishlist-box {
@@ -26,13 +26,13 @@
         min-width: 110px;
         height: 110px;
         object-fit: cover;
-        border-radius: $border-radius-default;
+        border-radius: var(--border-radius-default);
       }
 
       .price {
-        color: $font-custom-color;
-        font-weight: $font-weight-normal;
-        font-size: $font-size-medium;
+        color: var(--font-custom-color);
+        font-weight: var(--font-weight-normal);
+        font-size: var(--font-size-medium);
       }
     }
   }
@@ -68,150 +68,25 @@
         animation: animateCircle 0.3s linear forwards;
         opacity: 1;
       }
-      #grp1 {
-        opacity: 1;
-        transition: 0.1s all 0.3s;
-      }
 
-      #grp1 #oval1 {
-        transform: scale(0) translate(0, -30px);
-        transform-origin: 0 0 0;
-        transition: 0.5s transform 0.3s;
-      }
+      // Combined repeated styles for #grp1 - #grp7
+      @for $i from 1 through 7 {
+        #grp#{$i} {
+          opacity: 1;
+          transition: 0.1s all 0.3s;
 
-      #grp1 #oval2 {
-        transform: scale(0) translate(10px, -50px);
-        transform-origin: 0 0 0;
-        transition: 1.5s transform 0.3s;
-      }
-      #grp2 {
-        opacity: 1;
-        transition: 0.1s all 0.3s;
-      }
-      #grp2 #oval1 {
-        transform: scale(0) translate(30px, -15px);
-        transform-origin: 0 0 0;
-        transition: 0.5s transform 0.3s;
-      }
+          #oval1 {
+            transform: scale(0) translate(30px, 15px);
+            transform-origin: 0 0 0;
+            transition: 0.5s transform 0.3s;
+          }
 
-      #grp2 #oval2 {
-        transform: scale(0) translate(60px, -15px);
-        transform-origin: 0 0 0;
-        transition: 1.5s transform 0.3s;
-      }
-
-      #grp3 {
-        opacity: 1;
-        transition: 0.1s all 0.3s;
-      }
-
-      #grp3 #oval1 {
-        transform: scale(0) translate(30px, 0px);
-        transform-origin: 0 0 0;
-        transition: 0.5s transform 0.3s;
-      }
-
-      #grp3 #oval2 {
-        transform: scale(0) translate(60px, 10px);
-        transform-origin: 0 0 0;
-        transition: 1.5s transform 0.3s;
-      }
-
-      #grp4 {
-        opacity: 1;
-        transition: 0.1s all 0.3s;
-      }
-
-      #grp4 #oval1 {
-        transform: scale(0) translate(30px, 15px);
-        transform-origin: 0 0 0;
-        transition: 0.5s transform 0.3s;
-      }
-
-      #grp4 #oval2 {
-        transform: scale(0) translate(40px, 50px);
-        transform-origin: 0 0 0;
-        transition: 1.5s transform 0.3s;
-      }
-
-      #grp5 {
-        opacity: 1;
-        transition: 0.1s all 0.3s;
-      }
-
-      #grp5 #oval1 {
-        transform: scale(0) translate(-10px, 20px);
-        transform-origin: 0 0 0;
-        transition: 0.5s transform 0.3s;
-      }
-
-      #grp5 #oval2 {
-        transform: scale(0) translate(-60px, 30px);
-        transform-origin: 0 0 0;
-        transition: 1.5s transform 0.3s;
-      }
-
-      #grp6 {
-        opacity: 1;
-        transition: 0.1s all 0.3s;
-      }
-
-      #grp6 #oval1 {
-        transform: scale(0) translate(-30px, 0px);
-        transform-origin: 0 0 0;
-        transition: 0.5s transform 0.3s;
-      }
-
-      #grp6 #oval2 {
-        transform: scale(0) translate(-60px, -5px);
-        transform-origin: 0 0 0;
-        transition: 1.5s transform 0.3s;
-      }
-
-      #grp7 {
-        opacity: 1;
-        transition: 0.1s all 0.3s;
-      }
-
-      #grp7 #oval1 {
-        transform: scale(0) translate(-30px, -15px);
-        transform-origin: 0 0 0;
-        transition: 0.5s transform 0.3s;
-      }
-
-      #grp7 #oval2 {
-        transform: scale(0) translate(-55px, -30px);
-        transform-origin: 0 0 0;
-        transition: 1.5s transform 0.3s;
-      }
-      #grp2 {
-        opacity: 1;
-        transition: 0.1s opacity 0.3s;
-      }
-
-      #grp3 {
-        opacity: 1;
-        transition: 0.1s opacity 0.3s;
-      }
-
-      #grp4 {
-        opacity: 1;
-        transition: 0.1s opacity 0.3s;
-      }
-
-      #grp5 {
-        opacity: 1;
-        transition: 0.1s opacity 0.3s;
-      }
-
-      #grp6 {
-        opacity: 1;
-        transition: 0.1s opacity 0.3s;
-      }
-
-      #grp7 {
-        opacity: 1;
-        transition: 0.1s opacity 0.3s;
+          #oval2 {
+            transform: scale(0) translate(40px, 50px);
+            transform-origin: 0 0 0;
+            transition: 1.5s transform 0.3s;
+          }
+        }
       }
     }
   }

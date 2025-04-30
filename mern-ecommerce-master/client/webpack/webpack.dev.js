@@ -68,17 +68,18 @@ const config = {
     })
   ],
   devServer: {
-    port: 8080,
-    open: true,
-    inline: true,
-    compress: true,
-    hot: true,
-    allowedHosts: ['all'],
-    historyApiFallback: true,
-    overlay: true // ✅ move overlay here
-  }
+  port: 8080,
+  open: true,
+  inline: true,
+  compress: true,
+  hot: true,
+  historyApiFallback: true,
+  overlay: true,
+  disableHostCheck: true // optional, use only if necessary
   },
   devtool: 'eval-source-map'
 };
 
 module.exports = webpackMerge(common, config);
+
+

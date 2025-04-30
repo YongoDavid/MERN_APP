@@ -32,7 +32,7 @@ $danger-bg: #dc3545;
 $danger-hover-bg: #c3081a;
 
 $dark-bg: $theme-black;
-$dark-hover-bg: $black;
+$dark-hover-bg:#000000;
 
 $default-color: #758696;
 $default-bg: #758696;
@@ -43,14 +43,14 @@ $indigo: #6610f2 !default;
 $purple: #6f42c1 !default;
 $pink: #e83e8c !default;
 $red: #ff5454;
-$white: #fff;
+$white: #ffffff;
 $orange: #fabb3d;
 $yellow: #ffc107 !default;
 $green: #79c447;
 $gray: #808081;
 $teal: #20c997 !default;
 $cyan: #67c2ef;
-$black: #000;
+$black: #000000;
 
 $font-family: 'Poppins';
 $font-family-heading: 'Poppins';
@@ -129,3 +129,16 @@ $bars: url('/images/bars.png');
 $chevron-down: url('/images/chevron-down.svg');
 $close: url('/images/close.svg');
 $bag: url('/images/bag.svg');
+
+
+$breakpoint-md: 768px;
+
+// Define the mixin for `media-breakpoint-up`
+@mixin media-breakpoint-up($size) {
+  @if $size == md {
+    @media (min-width: #{$breakpoint-md}) {
+      @content;
+    }
+  }
+  // You can extend with more breakpoints, e.g. sm, lg, etc.
+}

@@ -6,7 +6,7 @@
   .fa,
   span {
     color: $white;
-    font-size: $font-size-medium !important;
+    font-size: $font-size-medium;
     font-weight: $font-weight-normal;
     margin: 0px 5px;
   }
@@ -17,7 +17,7 @@
   border-bottom: $border-primary;
 
   .logo {
-    font-size: $font-size-heading-large !important;
+    font-size: $font-size-heading-large;
     font-weight: $font-weight-normal;
   }
 }
@@ -33,15 +33,10 @@
 }
 
 .top-header {
-  // margin-top: 10px;
-  // margin-bottom: 10px;
-  // height: 95px;
   padding: 16px 0px;
 
   @include media-breakpoint-up(lg) {
-    // height: 60px;
-
-    padding: 22px ​0px;
+    padding: 22px 0px;
   }
 
   .bars-icon {
@@ -62,7 +57,7 @@
   .fa {
     cursor: pointer;
     color: $theme-dark-gray;
-    font-size: $font-size-x-huge !important;
+    font-size: $font-size-x-huge;
   }
 
   .col-no-padding {
@@ -73,7 +68,7 @@
   }
 
   .navbar {
-    background-color: $white !important;
+    background-color: $white;
     justify-content: flex-end;
     padding: 0;
 
@@ -101,14 +96,14 @@
       padding-bottom: 0;
 
       &.active {
-        color: $font-hover-color !important;
+        color: $font-hover-color;
       }
     }
 
     a,
     span {
       &:hover {
-        color: $font-hover-color !important;
+        color: $font-hover-color;
       }
     }
 
@@ -135,9 +130,10 @@
   }
 
   .brand {
-    @include flex();
+    display: flex;
     flex-wrap: wrap;
     align-items: center;
+
     @include media-breakpoint-down(sm) {
       margin-top: 10px;
       justify-content: center;
@@ -145,7 +141,7 @@
 
     .logo {
       margin: 0px;
-      color: $font-custom-color !important;
+      color: $font-custom-color;
       @include media-breakpoint-up(md) {
         margin-left: 15px;
       }
@@ -164,13 +160,13 @@
     height: 20px;
     background-color: $primary-bg;
     color: $white;
-    @include flex();
+    display: flex;
     justify-content: center;
     align-items: center;
   }
 
   .header-links {
-    @include flex();
+    display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
   }
@@ -197,7 +193,7 @@
   }
 
   .mini-brand-block {
-    @include flex();
+    display: flex;
     flex-wrap: wrap;
     margin-top: 12px;
 
@@ -211,15 +207,13 @@
 
       .brand-link {
         position: relative;
-        color: $font-custom-color !important;
+        color: $font-custom-color;
         font-size: $font-size-large;
         font-weight: $font-weight-normal;
 
         &:hover {
           &:after {
             opacity: 1;
-            -webkit-transform: translateY(2px);
-            -moz-transform: translateY(2px);
             transform: translateY(2px);
           }
         }
@@ -233,14 +227,7 @@
           background-color: $primary-bg;
           content: '';
           opacity: 0;
-          -webkit-transition: opacity $layout-transition-speed,
-            -webkit-transform $layout-transition-speed;
-          -moz-transition: opacity $layout-transition-speed,
-            -moz-transform $layout-transition-speed;
-          transition: opacity $layout-transition-speed,
-            transform $layout-transition-speed;
-          -webkit-transform: translateY(10px);
-          -moz-transform: translateY(10px);
+          transition: opacity $layout-transition-speed, transform $layout-transition-speed;
           transform: translateY(10px);
         }
       }

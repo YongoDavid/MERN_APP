@@ -7,7 +7,7 @@
     }
 
     .share-btn {
-      @include flex();
+      display: flex; // Replacing the @include flex() with native CSS
       flex-direction: column;
       justify-content: center;
       align-items: center;

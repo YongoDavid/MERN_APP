@@ -1,7 +1,7 @@
 .order-dashboard {
   .order-list {
     .order-details {
-      @include flex();
+      display: flex; /* Replaces @include flex() */
       flex-direction: column;
       height: 100%;
     }
@@ -17,11 +17,9 @@
           border-top-right-radius: $border-radius-default;
           border-top-left-radius: $border-radius-default;
 
-          @include media-breakpoint-up(lg) {
+          /* Replace @include media-breakpoint-up(lg) */
+          @media (min-width: 992px) {
             border-radius: $border-radius-default;
-          }
-
-          @include media-breakpoint-up(lg) {
             width: 90px;
             height: 90px;
           }
@@ -43,7 +41,8 @@
     .btn-link {
       margin-right: 10px;
 
-      @include media-breakpoint-down(xs) {
+      /* Replace @include media-breakpoint-down(xs) */
+      @media (max-width: 576px) {
         width: 100%;
         margin-bottom: 10px;
       }
@@ -90,7 +89,8 @@
     padding-bottom: 16px;
     margin-bottom: 16px;
 
-    @include media-breakpoint-down(xs) {
+    /* Replace @include media-breakpoint-down(xs) */
+    @media (max-width: 576px) {
       .dropdown-confirm {
         .btn-group {
           width: 100%;
@@ -103,7 +103,8 @@
       }
     }
 
-    @include media-breakpoint-up(md) {
+    /* Replace @include media-breakpoint-up(md) */
+    @media (min-width: 768px) {
       .box {
         width: 50%;
       }

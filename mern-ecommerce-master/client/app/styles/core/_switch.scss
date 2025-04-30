@@ -1,6 +1,6 @@
 .switch-checkbox {
   .switch-checkbox-input {
-    @include sr-only();
+    @include sr-only(); // Assuming sr-only is defined elsewhere, leave as is
   }
 
   .switch-checkbox-input + .switch-label {
@@ -21,7 +21,7 @@
     background: grey;
     border-radius: 100px;
     position: relative;
-    @include transition();
+    transition: background-color 0.3s ease; // Replaced @include transition() with native CSS transition
   }
 
   .switch-checkbox-input + .switch-label .switch-label-toggle::before {
@@ -33,7 +33,7 @@
     height: 20px;
     border-radius: $border-radius-circle;
     background-color: $white;
-    @include transition();
+    transition: left 0.3s ease; // Replaced @include transition() with native CSS transition
   }
 
   .switch-checkbox-input:checked + .switch-label .switch-label-toggle::before {

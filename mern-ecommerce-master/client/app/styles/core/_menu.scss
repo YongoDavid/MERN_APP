@@ -1,3 +1,6 @@
+@use 'path/to/your/variables' as *; // Assuming you have variables defined in a separate file
+@use 'path/to/your/mixins' as *; // Assuming your mixins are defined here
+
 // mini menu
 .mini-menu {
   visibility: hidden;

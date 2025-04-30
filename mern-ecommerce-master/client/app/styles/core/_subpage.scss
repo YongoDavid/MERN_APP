@@ -1,6 +1,6 @@
 .sub-page {
   .subpage-header {
-    @include flex();
+    display: flex; // Replaces @include flex()
     justify-content: space-between;
     align-items: center;
     border-bottom: $border-primary;
@@ -36,18 +36,6 @@
         // color: $white;
       }
     }
-
-    // .back {
-    //   &:hover {
-    //     color: $theme-blue;
-    //   }
-
-    //   .fa {
-    //     &::before {
-    //       margin-right: 5px;
-    //     }
-    //   }
-    // }
   }
 
   .subpage-body {
@@ -56,24 +44,19 @@
 }
 
 @keyframes vibrate {
-  10%,
-  90% {
+  10%, 90% {
     transform: translate3d(-1px, 0, 0);
   }
 
-  20%,
-  80% {
+  20%, 80% {
     transform: translate3d(2px, 0, 0);
   }
 
-  30%,
-  50%,
-  70% {
+  30%, 50%, 70% {
     transform: translate3d(-4px, 0, 0);
   }
 
-  40%,
-  60% {
+  40%, 60% {
     transform: translate3d(4px, 0, 0);
   }
 }
