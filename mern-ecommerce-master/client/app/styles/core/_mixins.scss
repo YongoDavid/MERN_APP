@@ -1,4 +1,7 @@
 // transition mixin
+@import './variables';
+
+
 @mixin transition($speed: $layout-transition-speed) {
   -webkit-transition: all $speed ease;
   -moz-transition: all $speed ease;
@@ -140,14 +143,20 @@
 
 @mixin hide-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  // scrollbar-width: none; /* Firefox */
 
   &::-webkit-scrollbar {
     display: none; /* Hide scrollbar for Chrome, Safari and Opera */
   }
 }
 
+// @include media.breakpoint-up(lg) {
+//   width: 50px;
+//   height: 50px;
+// }
+
 $breakpoint-md: 768px;
+$breakpoint-sm : 576px;
 
 // Define the mixin for `media-breakpoint-up`
 @mixin media-breakpoint-up($size) {
@@ -157,4 +166,36 @@ $breakpoint-md: 768px;
     }
   }
   // You can extend with more breakpoints, e.g. sm, lg, etc.
+}
+@mixin media-breakpoint($size){
+    @if $size == lg {
+      @media (min-width :$md) and (max-height: $lg) {
+        @content;
+      }
+    }
+}
+
+@mixin media-breakpoint($ize){
+    @if $size == md {
+      @media (min-width :$md) and (max-height: $lg) {
+        @content;
+      }
+    }
+}
+
+
+$breakpoint-sm: 576px;
+
+// Mixin for media-breakpoint-down
+@mixin media-breakpoint-down($size) {
+  @if $size == sm {
+    @media (max-width: #{$breakpoint-sm}) {
+      @content;
+    }
+  }
+
+  // Add more if needed:
+  @if $size == md { @media (max-width: 768px) { @content; } }
+  @if $size == sm { @media (max-width: 576px) { @content; } }
+  @if $size == lg { @media (max-width: 768px) { @content; } }
 }

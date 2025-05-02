@@ -96,4 +96,6 @@ Configuration loaded through server/config/keys.js
 Database Models (server/models/):
 All models use Mongoose Schema for data modeling
 Each model represents a collection in MongoDB
-Models include validation and relationship definitions       Stopped at mixins.scss                                            
+Models include validation and relationship definitions 
+      
+Continue with setting up server and then fix client issue.

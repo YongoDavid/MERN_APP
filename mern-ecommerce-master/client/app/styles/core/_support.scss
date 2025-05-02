@@ -1,3 +1,6 @@
+@use './mixins' as *;
+@import './variables';
+
 .support {
   .u-list {
     li {

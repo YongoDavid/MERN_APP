@@ -1,4 +1,4 @@
-@use 'path/to/your/variables' as *;  // Replace with the actual path to your variables file
+@import './variables';
 
 .sell {
   .agreement-banner-text {

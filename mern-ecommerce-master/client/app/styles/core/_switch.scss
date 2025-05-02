@@ -1,3 +1,6 @@
+@import './variables';
+@import './mixins';
+
 .switch-checkbox {
   .switch-checkbox-input {
     @include sr-only(); // Assuming sr-only is defined elsewhere, leave as is

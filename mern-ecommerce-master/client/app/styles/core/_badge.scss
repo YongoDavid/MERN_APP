@@ -1,3 +1,6 @@
+@use './mixins' as *;
+@import './variables';
+
 .custom-badge {
   padding: 8px 10px;
   //   border-radius: $border-radius-default;

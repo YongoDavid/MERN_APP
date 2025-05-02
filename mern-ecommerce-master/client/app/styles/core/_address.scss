@@ -1,6 +1,7 @@
-@use 'path/to/variables' as *;
-@use 'path/to/mixins' as *;
-@use 'path/to/media' as media;
+// _address.scss
+@use './mixins';
+@use './breakpoints' as media;
+@import 'variables';
 
 .address-dashboard {
   .a-list {
@@ -19,6 +20,7 @@
         width: 35px;
         height: 35px;
 
+        // ✅ FIXED: use block for mixin that expects @content
         @include media.breakpoint-up(lg) {
           width: 50px;
           height: 50px;

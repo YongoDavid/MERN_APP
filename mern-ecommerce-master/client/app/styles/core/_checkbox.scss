@@ -1,3 +1,6 @@
+@import './variables';
+@import './mixins';
+
 .checkbox {
   input[type='checkbox'] {
     @include sr-only();

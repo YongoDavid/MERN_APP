@@ -1,3 +1,6 @@
+@use './mixins' as *;
+@import './variables';
+
 /* start wishlist dashboard styles */
 .wishlist-dashboard {
   .w-list {

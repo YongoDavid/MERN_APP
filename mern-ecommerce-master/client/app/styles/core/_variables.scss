@@ -1,5 +1,8 @@
 // sass variables
-
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
 // Theme colors
 $theme-green: #00acac;
 $theme-gray: #f8f9fa;
@@ -11,6 +14,10 @@ $theme-purple: #727cb6;
 $theme-white: #f6f7f8;
 $theme-light-white: #f0f0f0;
 $theme-light-blue-white: #e8f0fe;
+$breakpoint-sm: 576px;
+$breakpoint-lg: 992px;
+$breakpoint-md: 768px;
+
 
 $theme-black: #323232;
 $theme-light-black: #24292e;
@@ -132,7 +139,7 @@ $bag: url('/images/bag.svg');
 
 
 $breakpoint-md: 768px;
-
+$breakpoint-sm : 576px;
 // Define the mixin for `media-breakpoint-up`
 @mixin media-breakpoint-up($size) {
   @if $size == md {
@@ -142,3 +149,29 @@ $breakpoint-md: 768px;
   }
   // You can extend with more breakpoints, e.g. sm, lg, etc.
 }
+
+@mixin media-breakpoint-down($size){
+  @if $size == sm {
+    @media (min-width : #{$breakpoint-sm}){
+      @content;
+    }
+  }
+}
+
+@mixin media-breakpoint-up($size){
+  @if $size == md {
+    @media (min-width : #{$breakpoint-md}){
+      @content;
+    }
+  }
+}
+
+@mixin media-breakpoint-up($size){
+  @if $size == lg {
+    @media (min-width : #{$breakpoint-lg}){
+      @content;
+    }
+  }
+}
+
+

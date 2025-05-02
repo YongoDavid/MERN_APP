@@ -1,3 +1,5 @@
+@use './mixins' as *;
+@import './variables';
 /* start autosuggest styles */
 .react-autosuggest__container {
   position: relative;

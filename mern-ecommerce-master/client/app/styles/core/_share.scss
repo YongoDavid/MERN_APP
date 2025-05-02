@@ -1,3 +1,5 @@
+@use './mixins' as *;
+@import './variables';
 .share-box {
   li {
     margin-right: 14px;
