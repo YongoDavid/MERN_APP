@@ -1,4 +1,5 @@
-const AWS = require('aws-sdk');
+const { Upload } = require('@aws-sdk/lib-storage');
+const { S3 } = require('@aws-sdk/client-s3');
 
 const keys = require('../config/keys');
 
@@ -12,9 +13,12 @@ exports.s3Upload = async image => {
     }
 
     if (image) {
-      const s3bucket = new AWS.S3({
-        accessKeyId: keys.aws.accessKeyId,
-        secretAccessKey: keys.aws.secretAccessKey,
+      const s3bucket = new S3({
+        credentials: {
+          accessKeyId: keys.aws.accessKeyId,
+          secretAccessKey: keys.aws.secretAccessKey
+        },
+
         region: keys.aws.region
       });
 
@@ -25,7 +29,10 @@ exports.s3Upload = async image => {
         ContentType: image.mimetype
       };
 
-      const s3Upload = await s3bucket.upload(params).promise();
+      const s3Upload = await new Upload({
+        client: s3bucket,
+        params
+      }).done();
 
       imageUrl = s3Upload.Location;
       imageKey = s3Upload.key;
