@@ -133,12 +133,16 @@ router.post('/register', async (req, res) => {
       id: registeredUser.id
     };
 
-    await mailgun.sendEmail(
-      registeredUser.email,
-      'signup',
-      null,
-      registeredUser
-    );
+    try {
+      await mailgun.sendEmail(
+        registeredUser.email,
+        'signup',
+        null,
+        registeredUser
+      );
+    } catch (emailError) {
+      console.warn('Mailgun send failed:', emailError.message);
+    }
 
     const token = jwt.sign(payload, secret, { expiresIn: tokenLife });
 
@@ -155,6 +159,7 @@ router.post('/register', async (req, res) => {
       }
     });
   } catch (error) {
+    console.error('Registration Error:', error);
     res.status(400).json({
       error: 'Your request could not be processed. Please try again.'
     });
