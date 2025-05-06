@@ -17,6 +17,7 @@ const { EMAIL_PROVIDER, JWT_COOKIE } = require('../../constants');
 const { secret, tokenLife } = keys.jwt;
 
 router.post('/login', async (req, res) => {
+  console.log('Received login POST', req.body);
   try {
     const { email, password } = req.body;
 

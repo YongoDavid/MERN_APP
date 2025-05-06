@@ -8,6 +8,7 @@ const api = `/${apiURL}`;
 
 // api routes
 router.use(api, apiRoutes);
+console.log('Mounting /api routes...');
 router.use(api, (req, res) => res.status(404).json('No API route found'));
 
 module.exports = router;

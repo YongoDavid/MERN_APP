@@ -8,6 +8,7 @@ const keys = require('./config/keys');
 const routes = require('./routes');
 const socket = require('./socket');
 const setupDB = require('./utils/db');
+const apiRoutes = require('./routes/api');
 
 const { port } = keys;
 const app = express();
@@ -20,11 +21,18 @@ app.use(
     frameguard: true
   })
 );
-app.use(cors());
+// app.use(cors());
+app.use(cors({
+  origin: process.env.CLIENT_URL,
+  credentials: true
+}));
+
 
 setupDB();
 // require('./config/passport')(app);
-app.use(routes);
+
+app.use('/api', apiRoutes);
+console.log('Mounting API routes...');
 
 const server = app.listen(port, () => {
   console.log(
