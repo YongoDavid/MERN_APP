@@ -14,7 +14,7 @@ import {
 } from './constants';
 import handleError from '../../utils/error';
 import { allFieldsValidation } from '../../utils/validation';
-import { API_URL } from '../../constants';
+import { REACT_APP_API_URL } from '../../constants';
 
 export const newsletterChange = (name, value) => {
   return {
@@ -43,7 +43,7 @@ export const subscribeToNewsletter = () => {
       }
 
       const response = await axios.post(
-        `${API_URL}/newsletter/subscribe`,
+        `${REACT_APP_API_URL}/newsletter/subscribe`,
         user
       );
 

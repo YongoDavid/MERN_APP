@@ -21,7 +21,7 @@ import {
 } from './constants';
 import handleError from '../../utils/error';
 import { allFieldsValidation, santizeFields } from '../../utils/validation';
-import { API_URL } from '../../constants';
+import { REACT_APP_API_URL } from '../../constants';
 
 export const reviewChange = (name, value) => {
   let formData = {};
@@ -38,7 +38,7 @@ export const fetchReviews = (n, v) => {
     try {
       dispatch({ type: SET_REVIEWS_LOADING, payload: true });
 
-      const response = await axios.get(`${API_URL}/review`, {
+      const response = await axios.get(`${REACT_APP_API_URL}/review`, {
         params: {
           page: v ?? 1,
           limit: 20
@@ -63,7 +63,7 @@ export const fetchReviews = (n, v) => {
 export const approveReview = review => {
   return async (dispatch, getState) => {
     try {
-      await axios.put(`${API_URL}/review/approve/${review._id}`);
+      await axios.put(`${REACT_APP_API_URL}/review/approve/${review._id}`);
 
       dispatch(fetchReviews());
     } catch (error) {
@@ -75,7 +75,7 @@ export const approveReview = review => {
 export const rejectReview = review => {
   return async (dispatch, getState) => {
     try {
-      await axios.put(`${API_URL}/review/reject/${review._id}`);
+      await axios.put(`${REACT_APP_API_URL}/review/reject/${review._id}`);
 
       dispatch(fetchReviews());
     } catch (error) {
@@ -88,7 +88,7 @@ export const rejectReview = review => {
 export const deleteReview = id => {
   return async (dispatch, getState) => {
     try {
-      const response = await axios.delete(`${API_URL}/review/delete/${id}`);
+      const response = await axios.delete(`${REACT_APP_API_URL}/review/delete/${id}`);
 
       const successfulOptions = {
         title: `${response.data.message}`,
@@ -113,7 +113,7 @@ export const deleteReview = id => {
 export const fetchProductReviews = slug => {
   return async (dispatch, getState) => {
     try {
-      const response = await axios.get(`${API_URL}/review/${slug}`);
+      const response = await axios.get(`${REACT_APP_API_URL}/review/${slug}`);
 
       const { ratingSummary, totalRatings, totalReviews, totalSummary } =
         getProductReviewsSummary(response.data.reviews);
@@ -171,7 +171,7 @@ export const addProductReview = () => {
 
       const santizedReview = santizeFields(newReview);
 
-      const response = await axios.post(`${API_URL}/review/add`, {
+      const response = await axios.post(`${REACT_APP_API_URL}/review/add`, {
         ...santizedReview,
         isRecommended: review.isRecommended.value
       });

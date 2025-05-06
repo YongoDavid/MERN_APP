@@ -23,7 +23,7 @@ import {
 } from './constants';
 import handleError from '../../utils/error';
 import { allFieldsValidation } from '../../utils/validation';
-import { API_URL } from '../../constants';
+import { REACT_APP_API_URL } from '../../constants';
 
 export const addressChange = (name, value) => {
   let formData = {};
@@ -63,7 +63,7 @@ export const fetchAddresses = () => {
   return async (dispatch, getState) => {
     try {
       dispatch(setAddressLoading(true));
-      const response = await axios.get(`${API_URL}/address`);
+      const response = await axios.get(`${REACT_APP_API_URL}/address`);
       dispatch({ type: FETCH_ADDRESSES, payload: response.data.addresses });
     } catch (error) {
       handleError(error, dispatch);
@@ -77,7 +77,7 @@ export const fetchAddresses = () => {
 export const fetchAddress = addressId => {
   return async (dispatch, getState) => {
     try {
-      const response = await axios.get(`${API_URL}/address/${addressId}`);
+      const response = await axios.get(`${REACT_APP_API_URL}/address/${addressId}`);
 
       dispatch({
         type: FETCH_ADDRESS,
@@ -120,7 +120,7 @@ export const addAddress = () => {
         ...newAddress
       };
 
-      const response = await axios.post(`${API_URL}/address/add`, address);
+      const response = await axios.post(`${REACT_APP_API_URL}/address/add`, address);
 
       const successfulOptions = {
         title: `${response.data.message}`,
@@ -197,7 +197,7 @@ export const updateAddress = () => {
 export const deleteAddress = id => {
   return async (dispatch, getState) => {
     try {
-      const response = await axios.delete(`${API_URL}/address/delete/${id}`);
+      const response = await axios.delete(`${REACT_APP_API_URL}/address/delete/${id}`);
 
       const successfulOptions = {
         title: `${response.data.message}`,

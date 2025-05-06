@@ -9,13 +9,13 @@ import axios from 'axios';
 
 import { FETCH_WISHLIST, SET_WISHLIST_LOADING } from './constants';
 import handleError from '../../utils/error';
-import { API_URL } from '../../constants';
+import { REACT_APP_API_URL } from '../../constants';
 
 export const updateWishlist = (isLiked, productId) => {
   return async (dispatch, getState) => {
     try {
       if (getState().authentication.authenticated === true) {
-        const response = await axios.post(`${API_URL}/wishlist`, {
+        const response = await axios.post(`${REACT_APP_API_URL}/wishlist`, {
           isLiked,
           product: productId
         });

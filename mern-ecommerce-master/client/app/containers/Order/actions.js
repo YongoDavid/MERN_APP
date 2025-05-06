@@ -21,7 +21,7 @@ import {
 import { clearCart, getCartId } from '../Cart/actions';
 import { toggleCart } from '../Navigation/actions';
 import handleError from '../../utils/error';
-import { API_URL } from '../../constants';
+import { REACT_APP_API_URL } from '../../constants';
 
 export const updateOrderStatus = value => {
   return {
@@ -42,7 +42,7 @@ export const fetchOrders = (page = 1) => {
     try {
       dispatch(setOrderLoading(true));
 
-      const response = await axios.get(`${API_URL}/order`, {
+      const response = await axios.get(`${REACT_APP_API_URL}/order`, {
         params: {
           page: page ?? 1,
           limit: 20
@@ -74,7 +74,7 @@ export const fetchAccountOrders = (page = 1) => {
     try {
       dispatch(setOrderLoading(true));
 
-      const response = await axios.get(`${API_URL}/order/me`, {
+      const response = await axios.get(`${REACT_APP_API_URL}/order/me`, {
         params: {
           page: page ?? 1,
           limit: 20
@@ -106,7 +106,7 @@ export const searchOrders = filter => {
     try {
       dispatch(setOrderLoading(true));
 
-      const response = await axios.get(`${API_URL}/order/search`, {
+      const response = await axios.get(`${REACT_APP_API_URL}/order/search`, {
         params: {
           search: filter.value
         }
@@ -131,7 +131,7 @@ export const fetchOrder = (id, withLoading = true) => {
         dispatch(setOrderLoading(true));
       }
 
-      const response = await axios.get(`${API_URL}/order/${id}`);
+      const response = await axios.get(`${REACT_APP_API_URL}/order/${id}`);
 
       dispatch({
         type: FETCH_ORDER,
@@ -152,7 +152,7 @@ export const cancelOrder = () => {
     try {
       const order = getState().order.order;
 
-      await axios.delete(`${API_URL}/order/cancel/${order._id}`);
+      await axios.delete(`${REACT_APP_API_URL}/order/cancel/${order._id}`);
 
       dispatch(push(`/dashboard/orders`));
     } catch (error) {
@@ -202,7 +202,7 @@ export const addOrder = () => {
       const total = getState().cart.cartTotal;
 
       if (cartId) {
-        const response = await axios.post(`${API_URL}/order/add`, {
+        const response = await axios.post(`${REACT_APP_API_URL}/order/add`, {
           cartId,
           total
         });

@@ -15,7 +15,7 @@ import {
 } from './constants';
 import handleError from '../../utils/error';
 import { allFieldsValidation } from '../../utils/validation';
-import { API_URL } from '../../constants';
+import { REACT_APP_API_URL } from '../../constants';
 
 export const forgotPasswordChange = (name, value) => {
   return {
@@ -44,7 +44,7 @@ export const forgotPassowrd = () => {
         });
       }
 
-      const response = await axios.post(`${API_URL}/auth/forgot`, user);
+      const response = await axios.post(`${REACT_APP_API_URL}/auth/forgot`, user);
       const successfulOptions = {
         title: `${response.data.message}`,
         position: 'tr',

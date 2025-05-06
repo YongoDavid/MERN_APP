@@ -14,7 +14,7 @@ import {
   SET_PROFILE_LOADING
 } from './constants';
 import handleError from '../../utils/error';
-import { API_URL } from '../../constants';
+import { REACT_APP_API_URL } from '../../constants';
 
 export const accountChange = (name, value) => {
   let formData = {};
@@ -43,7 +43,7 @@ export const fetchProfile = () => {
   return async (dispatch, getState) => {
     try {
       dispatch(setProfileLoading(true));
-      const response = await axios.get(`${API_URL}/user/me`);
+      const response = await axios.get(`${REACT_APP_API_URL}/user/me`);
 
       dispatch({ type: FETCH_PROFILE, payload: response.data.user });
     } catch (error) {
@@ -59,7 +59,7 @@ export const updateProfile = () => {
     const profile = getState().account.user;
 
     try {
-      const response = await axios.put(`${API_URL}/user`, {
+      const response = await axios.put(`${REACT_APP_API_URL}/user`, {
         profile
       });
 
