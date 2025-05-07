@@ -27,7 +27,7 @@ app.use(
 );
 // app.use(cors());
 app.use(cors({
-  origin: process.env.CLIENT_URL,
+  origin: 'https://mern-app-client-livid.vercel.app/',
   credentials: true
 }));
 
