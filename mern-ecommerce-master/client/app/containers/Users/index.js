@@ -31,7 +31,7 @@ class Users extends React.PureComponent {
     this.props.fetchUsers();
   }
 
-  handleUserSearch = e => {
+  handleUserSearch = e => { 
     if (e.value.length >= 2) {
       this.props.searchUsers({ name: 'user', value: e.value });
       this.setState({
