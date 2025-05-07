@@ -32,7 +32,7 @@ class CategoryShop extends React.PureComponent {
     return (
       <div className='category-shop'>
         {isLoading && <LoadingIndicator />}
-        {products && products.length > 0 && (
+        {(products || []).length > 0 && (
           <ProductList
             products={products}
             authenticated={authenticated}

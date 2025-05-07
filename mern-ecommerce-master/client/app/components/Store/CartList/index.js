@@ -20,7 +20,7 @@ const CartList = props => {
 
   return (
     <div className='cart-list'>
-      {cartItems.map((item, index) => (
+      {(cartItems || []).map((item, index) => (
         <div key={index} className='item-box'>
           <div className='item-details'>
             <Container>

@@ -30,7 +30,7 @@ const List = props => {
 
   return (
     <div className='review-list'>
-      {reviews.map((review, index) => (
+      {(reviews || []).map((review, index) => (
         <div className='d-flex align-items-center mb-3 review-box' key={index}>
           <div className='mx-3'>{getAvatar(review)}</div>
           <div className='p-3 p-lg-4 w-100'>

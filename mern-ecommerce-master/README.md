@@ -1,11 +1,10 @@
- ## MERN DETAILS Description
+## MERN DETAILS Description
 
 PACKAGES THAT ARE NOT DOWNLOADING :
 npm install connected-react-router (Currently have react 19 i need react 16)
 npm install react-bootstrap-table-next (Same issue with above )
 npm install react-bootstrap-table2-toolkit (Same issue wiith above )
 npm install react-notification-system-redux ( same issue with above )
-
 
 npm install optimize-css-assets-webpack-plugin
 
