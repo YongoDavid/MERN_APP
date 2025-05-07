@@ -104,10 +104,15 @@ Login is still not working , and throwing error on PM.
 Client dev server is now not starting.
 continue from auth.js and GPT error check when i return 
 
-Stopped at Step 6 but have not done step 3 of GPT resolutions 
+Stopped at Step 6 but have not done step 3 of GPT resolutions (Done)
 
 
-I have gone through all thhe steps again and i need to be more observant because i just noticed what has been causing these issues
+I have gone through all thhe steps again and i need to be more observant because i just noticed what has been causing these issues (Done)
 
 Client server is back to running without errors and no network error.
-Server side is also running without errors 
+Server side is also running without errors (Done)
+
+I have been able to host, client(vercel) and server(render)
+i have having issues with client side displaying properly.
+
+made an update to client/app/consants/index.js

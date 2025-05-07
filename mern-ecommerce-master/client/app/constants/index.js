@@ -2,7 +2,7 @@ export const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
 export const SOCKET_URL =
   window.location.host.indexOf('localhost') >= 0
-    ? 'http://127.0.0.1:3000/api'
+    ? 'https://mern-app-client-livid.vercel.app/'
     : window.location.host;
 
 export const ROLES = {
