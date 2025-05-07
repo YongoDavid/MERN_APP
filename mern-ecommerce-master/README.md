@@ -116,3 +116,4 @@ I have been able to host, client(vercel) and server(render)
 i have having issues with client side displaying properly.
 
 made an update to client/app/consants/index.js
+made changes to my vercel file 
