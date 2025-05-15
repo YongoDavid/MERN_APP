@@ -35,7 +35,7 @@ const WishList = props => {
 
   return (
     <div className='w-list'>
-      {wishlist.map((item, index) => (
+      {(wishlist || []).map((item, index) => (
         <div
           key={index}
           className='d-flex flex-row align-items-center mx-0 mb-3 wishlist-box'

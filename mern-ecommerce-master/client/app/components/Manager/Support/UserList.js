@@ -11,7 +11,7 @@ const UserList = props => {
 
   return (
     <ul className='u-list'>
-      {users.map((u, i) => {
+      {(users || []).map((u, i) => {
         const isSelected = selectedUser?.id === u.id;
         const isOnline = u.online ? true : false;
 

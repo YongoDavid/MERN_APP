@@ -17,7 +17,7 @@ const BrandList = props => {
       <h3 className='text-uppercase'>Shop By Brand</h3>
       <hr />
       <Row className='flex-sm-row'>
-        {brands.map((brand, index) => (
+        {(brands || []).map((brand, index) => (
           <Col xs='6' md='4' lg='3' key={index} className='mb-3 px-2'>
             <Link
               to={`/shop/brand/${brand.slug}`}

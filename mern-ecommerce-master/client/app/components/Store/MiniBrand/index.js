@@ -29,7 +29,7 @@ const MiniBrand = props => {
         </Link>
       </div>
       <div className='mini-brand-block'>
-        {brands.map((brand, index) => (
+        {(brands || []).map((brand, index) => (
           <div key={index} className='brand-item'>
             <Link
               to={`/shop/brand/${brand.slug}`}

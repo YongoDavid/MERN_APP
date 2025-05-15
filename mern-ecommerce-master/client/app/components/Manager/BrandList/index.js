@@ -13,7 +13,7 @@ const BrandList = props => {
 
   return (
     <div className='b-list'>
-      {brands.map((brand, index) => (
+      {(brands || []).map((brand, index) => (
         <Link
           to={`/dashboard/brand/edit/${brand._id}`}
           key={index}

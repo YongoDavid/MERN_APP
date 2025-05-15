@@ -13,7 +13,7 @@ const ProductList = props => {
 
   return (
     <div className='p-list'>
-      {products.map((product, index) => (
+      {(products || []).map((product, index) => (
         <Link
           to={`/dashboard/product/edit/${product._id}`}
           key={index}

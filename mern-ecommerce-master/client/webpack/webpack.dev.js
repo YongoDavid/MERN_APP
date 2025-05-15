@@ -7,7 +7,7 @@ const common = require('./webpack.common');
 
 const CURRENT_WORKING_DIR = process.cwd();
 
-const config = {
+module.exports = webpackMerge(common,{
   mode: 'development',
   output: {
     path: path.join(CURRENT_WORKING_DIR, '/dist'),
@@ -20,22 +20,20 @@ const config = {
         test: /\.(scss|sass|css)$/,
         use: [
           'style-loader',
-          {
-            loader: 'css-loader'
-          },
+          'css-loader',
           {
             loader: 'postcss-loader',
             options: {
-              plugins: () => [require('autoprefixer')]
+              postcssOptions: {
+                plugins: [require('autoprefixer')]
+              }
             }
           },
-          {
-            loader: 'sass-loader'
-          }
+          'sass-loader'
         ]
       },
       {
-        test: /\.(png|jpg|jpeg|gif|svg|ico)$/,
+        test: /\.(png|jpe?g|gif|svg|ico)$/,
         use: [
           {
             loader: 'file-loader',
@@ -47,7 +45,7 @@ const config = {
         ]
       },
       {
-        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
         use: [
           {
             loader: 'file-loader',
@@ -64,7 +62,7 @@ const config = {
     new Dotenv(),
     new HtmlWebpackPlugin({
       template: path.join(CURRENT_WORKING_DIR, 'public/index.html'),
-      inject: true
+      inject: true,
     })
   ],
   devServer: {
@@ -78,8 +76,9 @@ const config = {
   disableHostCheck: true // optional, use only if necessary
   },
   devtool: 'eval-source-map'
-};
-
-module.exports = webpackMerge(common, config);
+});
 
 
+
+// const webpackMerge = require('webpack-merge');
+// module.exports = webpackMerge(common, config);

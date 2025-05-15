@@ -52,7 +52,7 @@ const ReviewList = props => {
 
   return (
     <div className='r-list'>
-      {reviews.map((review, index) => (
+      {(reviews || []).map((review, index) => (
         <div key={index} className='review-box'>
           <div className='mb-3 p-4'>
             <div className='d-flex flex-row mx-0 mb-2 mb-lg-3 align-items-center justify-content-between'>

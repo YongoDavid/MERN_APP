@@ -167,7 +167,7 @@ export const updateOrderItemStatus = (itemId, status) => {
       const order = getState().order.order;
 
       const response = await axios.put(
-        `${API_URL}/order/status/item/${itemId}`,
+        `${REACT_APP_API_URL}/order/status/item/${itemId}`,
         {
           orderId: order._id,
           cartId: order.cartId,

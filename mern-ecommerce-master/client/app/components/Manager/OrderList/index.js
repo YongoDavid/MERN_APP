@@ -33,7 +33,7 @@ const OrderList = props => {
 
   return (
     <div className='order-list'>
-      {orders.map((order, index) => (
+      {(orders || []).map((order, index) => (
         <div key={index} className='order-box'>
           <Link to={`/order/${order._id}`} className='d-block box-link'>
             <div className='d-flex flex-column flex-lg-row mb-3'>

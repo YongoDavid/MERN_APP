@@ -50,7 +50,7 @@ export const fetchWishlist = () => {
     try {
       dispatch({ type: SET_WISHLIST_LOADING, payload: true });
 
-      const response = await axios.get(`${API_URL}/wishlist`);
+      const response = await axios.get(`${REACT_APP_API_URL}/wishlist`);
 
       dispatch({ type: FETCH_WISHLIST, payload: response.data.wishlist });
     } catch (error) {

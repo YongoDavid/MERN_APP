@@ -82,7 +82,7 @@ const OrderItems = props => {
     <div className='order-items pt-3'>
       <h2>Order Items</h2>
       <Row>
-        {order.products.map((item, index) => (
+        {(order.products || []).map((item, index) => (
           <Col xs='12' key={index} className='item'>
             <div className='order-item-box'>
               <div className='d-flex justify-content-between flex-column flex-md-row'>

@@ -173,7 +173,7 @@ export const updateAddress = () => {
       }
 
       const response = await axios.put(
-        `${API_URL}/address/${newAddress._id}`,
+        `${REACT_APP_API_URL}/address/${newAddress._id}`,
         newAddress
       );
 
